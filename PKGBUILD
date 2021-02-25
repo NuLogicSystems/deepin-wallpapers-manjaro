@@ -6,7 +6,7 @@ pkgver=$(date +%Y.%m)
 pkgrel=1
 pkgdesc="Manjaro branded wallpapers for the Deepin Desktop Enviroment"
 arch=('any')
-url='https://github.com/
+url='https://github.com/NuLogicSystems/manjaro-deepin-wallpapers'
 license=('GPL')
 
 package() {
