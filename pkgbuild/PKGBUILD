@@ -1,13 +1,14 @@
 # $Id$
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
-pkgname=manjaro-deepin-wallpapers
+pkgname=deepin-wallpapers-manjaro
 pkgver=$(date +%Y.%m)
 pkgrel=1
 pkgdesc="Manjaro branded wallpapers for the Deepin Desktop Enviroment"
 arch=('any')
 url='https://github.com/NuLogicSystems/manjaro-deepin-wallpapers'
 license=('GPL')
+groups=('deepin-manjaro')
 
 package() {
   cd ../..
