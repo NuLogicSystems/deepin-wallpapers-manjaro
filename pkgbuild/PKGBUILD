@@ -3,14 +3,28 @@
 
 pkgname=deepin-wallpapers-manjaro
 pkgver=$(date +%Y.%m)
-pkgrel=1
-pkgdesc="Manjaro branded wallpapers for the Deepin Desktop Enviroment"
+pkgrel=2
+pkgdesc="Default wallpapers for Manjaro DDE"
 arch=('any')
 url='https://github.com/NuLogicSystems/manjaro-deepin-wallpapers'
+makedepends=('deepin-api')
+provides=("deepin-wallpapers")
+conflicts=("deepin-wallpapers")
 license=('GPL')
 groups=('deepin-manjaro')
 
 package() {
+
   cd ../..
-  cp -aR usr $pkgdir/
+  install -dm755 "$pkgdir"/usr/share/wallpapers
+  cp -r deepin "$pkgdir"/usr/share/wallpapers/
+
+  install -dm755 "$pkgdir"/var/cache
+  cp -r image-blur "$pkgdir"/var/cache/
+
+  # Suggested by upstream
+  install -dm755 "$pkgdir"/usr/share/backgrounds/deepin
+  ln -s ../../wallpapers/deepin/manjaro-deepin-wave.jpg "$pkgdir"/usr/share/backgrounds/deepin/desktop.jpg
+  ln -s $(echo -n /usr/share/wallpapers/deepin/manjaro-deepin-wave.jpg | md5sum | cut -d " " -f 1).jpg \
+        "$pkgdir"/var/cache/image-blur/$(echo -n /usr/share/backgrounds/deepin/desktop.jpg | md5sum | cut -d " " -f 1).jpg
 }

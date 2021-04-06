@@ -1,2 +1,2 @@
 # deepin-wallpapers-manjaro
-Manjaro branded wallpapers for the Deepin Desktop Enviroment
+Default wallpapers for Manjaro DDE (conflicts and replaces upstream package)
