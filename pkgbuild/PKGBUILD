@@ -1,17 +1,28 @@
 # $Id$
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Josip Ponjavic <josipponjavic at gmail dot com>
+# Contributor: Xu Fasheng <fasheng.xu[AT]gmail.com>
 
 pkgname=deepin-wallpapers-manjaro
-pkgver=$(date +%Y.%m)
+pkgver=1.7.7
 pkgrel=2
+epoch=1
 pkgdesc="Default wallpapers for Manjaro DDE"
 arch=('any')
-url='https://github.com/NuLogicSystems/manjaro-deepin-wallpapers'
+url='https://github.com/NuLogicSystems/deepin-wallpapers-manjaro'
 makedepends=('deepin-api')
-provides=("deepin-wallpapers")
-conflicts=("deepin-wallpapers")
+provides=('deepin-wallpapers')
+conflicts=('deepin-wallpapers')
 license=('GPL')
 groups=('deepin-manjaro')
+
+build() {
+  cd ../..
+  for _pic in deepin/*; do
+    make PICS=$_pic
+  done
+}
 
 package() {
 
@@ -27,4 +38,7 @@ package() {
   ln -s ../../wallpapers/deepin/manjaro-deepin-wave.jpg "$pkgdir"/usr/share/backgrounds/deepin/desktop.jpg
   ln -s $(echo -n /usr/share/wallpapers/deepin/manjaro-deepin-wave.jpg | md5sum | cut -d " " -f 1).jpg \
         "$pkgdir"/var/cache/image-blur/$(echo -n /usr/share/backgrounds/deepin/desktop.jpg | md5sum | cut -d " " -f 1).jpg
+
+  # cleanup
+  rm -rf image-blur
 }
